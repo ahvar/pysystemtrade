@@ -5,6 +5,7 @@ __pycache__
 *.pyc
 *.pyo
 .tox
+.vscode/*
 dist
 build
 private
