@@ -68,7 +68,6 @@ def dict_of_df_to_dict(d, orient):
 def index():
     return render_template("index.html")
 
-
 @app.route("/capital")
 def capital():
     capital_data = dataCapital(data)
