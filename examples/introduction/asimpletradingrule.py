@@ -1,6 +1,11 @@
 import matplotlib
-
+from systems.accounts.account_forecast import pandl_for_instrument_forecast, get_pandl_calculator
+from matplotlib.pyplot import show
+from sysdata.sim.csv_futures_sim_data import csvFuturesSimData
+from sysquant.estimators.vol import robust_vol_calc
 matplotlib.use("TkAgg")
+from pprint import PrettyPrinter
+pp = PrettyPrinter(indent=4)
 """
 
 Work up a minimum example of a trend following system
@@ -9,35 +14,32 @@ Work up a minimum example of a trend following system
 
 # Get some data
 
-from sysdata.sim.csv_futures_sim_data import csvFuturesSimData
-
 """"
 Let's get some data
 
 We can get data from various places; however for now we're going to use
 prepackaged 'legacy' data stored in csv files
 """
-
 data = csvFuturesSimData()
 
-print(data)
+pp.pprint(data)
 """
 We get stuff out of data with methods
 """
 print(data.get_instrument_list())
-print(data.get_raw_price("EDOLLAR").tail(5))
+#print(data.get_raw_price("EDOLLAR").tail(5))
 """
 data can also behave in a dict like manner (though it's not a dict)
 """
 
-print(data["VIX"])
-print(data.keys())
+pp.pprint(data["VIX"])
+pp.pprint(data.keys())
 
 """
 Not all the instruments are easily identifiable
 """
 
-print(data.get_instrument_object_with_meta_data("MUMMY"))
+pp.pprint(data.get_instrument_object_with_meta_data("MUMMY"))
 
 
 """
@@ -49,7 +51,7 @@ We have extra futures data here
 
 """
 
-print(data.get_instrument_raw_carry_data("EDOLLAR").tail(6))
+#print(data.get_instrument_raw_carry_data("EDOLLAR").tail(6))
 """
 Technical note: csvFuturesSimData inherits from FuturesData which itself inherits
 from simData
@@ -101,23 +103,23 @@ ewmac = calc_ewmac_forecast(price, 32, 128)
 ewmac2 = calc_ewmac_forecast(price, 16, 64)
 
 ewmac.columns = ["forecast"]
-print(ewmac.tail(5))
+#print(ewmac.tail(5))
 
 from matplotlib.pyplot import show
 
-ewmac.plot()
-show()
+#ewmac.plot()
+#show()
 """
 Did we make money?
 """
+pandl_calculator = get_pandl_calculator(forecast=ewmac, price=price)
+pp.pprint(dir(pandl_calculator))
 
-from systems.accounts.account_forecast import pandl_for_instrument_forecast
+#account = pandl_for_instrument_forecast(forecast=ewmac, price=price)
 
-account = pandl_for_instrument_forecast(forecast=ewmac, price=price)
+#account.curve()
 
-account.curve()
+#account.curve().plot()
+#show()
 
-account.curve().plot()
-show()
-
-print(account.percent.stats())
+#print(account.percent.stats())

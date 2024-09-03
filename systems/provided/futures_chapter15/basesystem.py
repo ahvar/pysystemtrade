@@ -84,5 +84,4 @@ def futures_system(
 
 if __name__ == "__main__":
     import doctest
-
     doctest.testmod()

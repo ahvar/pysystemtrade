@@ -267,3 +267,15 @@ def generate_order_and_fill_at_idx_point_for_market_orders(
     list_of_orders = ListOfSimpleOrdersWithDate([simple_order])
 
     return ListOfSimpleOrdersAndResultingFill(list_of_orders=list_of_orders, fill=fill)
+
+if __name__ == "__main__":
+    pass
+    # simple_system = simplesystem()
+    # simple_system_config = Config("systems.provided.example.simplesystemconfig.yaml")
+    # simple_system_data = csvFuturesSimData()
+    # simple_system = simplesystem(data=simple_system_data, config=simple_system_config)
+    # order_simulator = OrderSimulator(system_accounts_stage=simple_system, instrument_code="ES")
+    # diagnostic_df = order_simulator.diagnostic_df()
+    # print(diagnostic_df)
+    # print("done")
+    # pp.pprint(diagnostic_df)

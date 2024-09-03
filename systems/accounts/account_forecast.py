@@ -302,3 +302,51 @@ def _get_normalised_forecast(
     normalised_forecast = forecast / target_abs_forecast
 
     return normalised_forecast
+
+
+def get_pandl_calculator(
+    forecast: pd.Series,
+    price: pd.Series,
+    capital: float = ARBITRARY_FORECAST_CAPITAL,
+    fx=arg_not_supplied,
+    risk_target: float = ARBITRARY_FORECAST_ANNUAL_RISK_TARGET_PERCENTAGE,
+    daily_returns_volatility: pd.Series = arg_not_supplied,
+    target_abs_forecast: float = 10.0,
+    SR_cost=0.0,
+    delayfill=True,
+    value_per_point=ARBITRARY_VALUE_OF_PRICE_POINT,
+) -> pandlCalculationWithSRCosts:
+    """
+    Get the pandl calculator for a forecast
+    """
+    if daily_returns_volatility is arg_not_supplied:
+        daily_returns_volatility = robust_daily_vol_given_price(price)
+
+    normalised_forecast = _get_normalised_forecast(
+        forecast, target_abs_forecast=target_abs_forecast
+    )
+
+    average_notional_position = _get_average_notional_position(
+        daily_returns_volatility,
+        risk_target=risk_target,
+        value_per_point=value_per_point,
+        capital=capital,
+    )
+
+    notional_position = _get_notional_position_for_forecast(
+        normalised_forecast, average_notional_position=average_notional_position
+    )
+
+    pandl_calculator = pandlCalculationWithSRCosts(
+        price,
+        SR_cost=SR_cost,
+        positions=notional_position,
+        fx=fx,
+        daily_returns_volatility=daily_returns_volatility,
+        average_position=average_notional_position,
+        capital=capital,
+        value_per_point=value_per_point,
+        delayfill=delayfill,
+    )
+
+    return pandl_calculator
