@@ -122,6 +122,10 @@ class pandlCalculation(object):
         return pandl_in_points * point_size
 
     def pandl_in_points(self) -> pd.Series:
+        #print(f"positions: \n{self.positions}")
+        #print(self.positions.describe())
+        #print(f"prices: \n{self.price}")
+        #print(self.price.describe())
         pandl_in_points = calculate_pandl(positions=self.positions, prices=self.price)
         return pandl_in_points
 
@@ -229,7 +233,6 @@ def calculate_pandl(positions: pd.Series, prices: pd.Series):
     price_returns = both_series.prices.diff()
 
     returns = both_series.positions.shift(1) * price_returns
-
     returns[returns.isna()] = 0.0
 
     return returns

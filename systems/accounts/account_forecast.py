@@ -1,5 +1,5 @@
 import pandas as pd
-
+from pathlib import Path
 from syscore.dateutils import ROOT_BDAYS_INYEAR
 from syscore.constants import arg_not_supplied
 from syscore.pandas.pdutils import sum_series
@@ -217,7 +217,7 @@ class accountForecast(accountCosts):
         return pandl_fcast
 
 
-ARBITRARY_FORECAST_CAPITAL = 100
+ARBITRARY_FORECAST_CAPITAL = 100000
 ARBITRARY_FORECAST_ANNUAL_RISK_TARGET_PERCENTAGE = 0.16
 
 
@@ -277,7 +277,13 @@ def _get_notional_position_for_forecast(
     aligned_average = average_notional_position.reindex(
         normalised_forecast.index, method="ffill"
     )
-
+    
+    # NOTE: only the 10 expected missing values in beginning of series observed
+    #na_series = average_notional_position.isna()
+    #na_count = sum(na_series)
+    #print(na_count)
+    #notional_position_for_forecast = aligned_average * normalised_forecast
+    #notional_position_for_forecast.to_csv(Path(__file__).resolve().parent / "notional_position_for_forecast.csv")
     return aligned_average * normalised_forecast
 
 

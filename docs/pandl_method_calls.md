@@ -1,0 +1,10 @@
+graph TD;
+    A[pandl_for_instrument_forecast] --> B[pandlCalculationWithSRCosts]
+    B --> C[accountCurve]
+    C --> D[as_pd_series_for_frequency]
+    D --> E[as_pd_series]
+    E --> F[net_pandl_in_base_currency]
+    F --> G[pandl_in_base_currency]
+    G --> H[pandl_in_instrument_currency]
+    H --> I[pandl_in_points]
+    I --> J[calculate_pandl]
