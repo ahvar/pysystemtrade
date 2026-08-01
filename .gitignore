@@ -18,6 +18,7 @@ restats
 .idea
 .project
 .pydevproject
+.vscode
 
 # pyenv
 .python-version
@@ -25,6 +26,7 @@ restats
 # venv
 env/
 venv/
+envs/
 
 # libreoffice
 .~lock.*
