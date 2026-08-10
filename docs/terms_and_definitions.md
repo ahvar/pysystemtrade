@@ -6,6 +6,10 @@ This short glossary collects a few futures-data terms that appear in the introdu
 
 A standardized agreement between two parties to buy or sell a specific asset at a specific price on a set future date. No matter what happens to the underlying asset prices in the interim, both sides are legally obligated to follow through when the contract expires. In practice, most traders unwind their positions prior to expiry.
 
+### Futures Pricing
+
+Futures prices aren't forecasts of where spot prices will land at expiration. Instead, they reflect current spot prices adjusted for the cost of holding the asset until delivery. This relationship is called the cost-of-carry model.
+
 ### Key Components of a Futures Contract
 
  - underlying asset: what is being traded (e.g crude oil, a stock index, currency, etc.)
@@ -36,6 +40,10 @@ For example, if you control a $50,000 contract with $5,000 initial margin and a 
 
 Futures accounts settle at the end of every trading day through a process called mark-to-market. Cash is credited or debited to your account accordingly.
 
+### Types of Futures Contracts
+
+The two broad categories are commodity futures and financial futures. Commodity futures include agriculture, energy, and metals contracts. Common financial futures include equity indicies, interest rates, and currencies. 
+
 ## Back-adjusted price per instrument
 
 A back-adjusted price is a continuous historical futures price series for a single instrument, adjusted to remove artificial jumps that occur when the system rolls from one contract month to the next.
@@ -62,13 +70,13 @@ It is the quantity that converts a price move into P&L and risk. If a contract m
 
 ## Contango
 
-Contango is a futures-curve shape in which farther-dated contracts trade above nearer-dated contracts.
+Contango is a futures-curve shape in which farther-dated contracts trade above nearer-dated contracts. When futures prices exceed spot prices, the market is in contango.
 
 In many cases, that implies a negative roll yield for a long position when exposure is rolled forward over time.
 
 ## Backwardation
 
-Backwardation is a futures-curve shape in which farther-dated contracts trade below nearer-dated contracts.
+Backwardation is a futures-curve shape in which farther-dated contracts trade below nearer-dated contracts. When futures prices trade below spot prices, the market is in backwardation, often signaling tight current supply or strong immediate demand.
 
 In many cases, that implies a positive roll yield for a long position when exposure is rolled forward over time.
 
